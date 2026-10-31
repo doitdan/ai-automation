@@ -32,6 +32,7 @@ Paths below are relative to the plugin root (two directories above this file).
 | Request | Skill |
 |---------|-------|
 | TODO: 팀원이 실제로 쓰는 요청 문구 | TODO: skill name |
+| "스킬 만들어줘", "에이전트 만들어줘", "이거 AI한테 맡기고 싶어", "자동화해줘", "위임 루프", "결과가 또 틀렸어", "매번 같은 걸 고쳐" | delegation-loop |
 
 ## Platform Adaptation
 
