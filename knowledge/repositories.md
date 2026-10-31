@@ -2,7 +2,7 @@
 
 | 저장소 | 역할 | GitHub |
 |--------|------|--------|
-| TODO | TODO | TODO |
+| ai-automation | 이 플러그인의 원본. 스킬·지식·에이전트를 고쳐 올리는 곳 | https://github.com/doitdan/ai-automation |
 | TODO | TODO | TODO |
 | TODO | TODO | TODO |
 
