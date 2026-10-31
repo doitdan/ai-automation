@@ -54,6 +54,21 @@ Claude Code·Cursor·Gemini CLI는 어댑터를 거쳐 같은 `skills/`·`knowle
 에이전트가 사용자에게 만들어 주는 결과물(보고서, 회의록, 메일)의 문체는 `knowledge/rules/writing.md`를 따른다.
 이 파일에 같은 내용을 다시 쓰지 않는다.
 
+## 버전 규칙
+
+Claude Code는 버전이 같으면 새 커밋이 있어도 플러그인을 업데이트하지 않는다.
+Codex는 커밋만 바뀌어도 받지만, 버전이 같으면 사용자가 어느 내용을 쓰는지 구분할 수 없다.
+
+- 사용자에게 닿는 파일을 바꿨으면 푸시하기 전에 버전을 올린다. 대상은 `skills/`, `knowledge/`, `agents/`, `hooks/`, `adapters/`, `config/`, `GEMINI.md`다.
+- `docs/`, `README.md`, `AGENTS.md`, `scripts/`, `.github/`만 바꿨으면 버전을 올리지 않는다.
+- 스킬이나 에이전트를 더하거나 지우거나 이름을 바꾸면 가운데 자리를 올린다. 예: 0.1.3 → 0.2.0
+- 그 밖의 변경은 끝자리를 올린다. 예: 0.1.0 → 0.1.1
+- 한 번에 푸시하는 커밋이 여럿이어도 버전은 한 번만 올린다.
+- 버전은 `scripts/bump-version.sh <version>`으로만 바꾼다. 매니페스트를 손으로 고치지 않는다.
+- `CHANGELOG.md`에 `## <version> — <날짜>` 제목을 만들고, 바뀐 것을 한 줄씩 적는다.
+- 푸시한 뒤 `v<version>` 태그를 붙여 푸시한다.
+- `validate.py`는 마지막 태그 이후 위 대상이 바뀌었는데 버전이 그대로면, 또는 CHANGELOG에 현재 버전 제목이 없으면 실패한다.
+
 ## PR 전에
 
 1. `python3 scripts/validate.py`를 돌린다.

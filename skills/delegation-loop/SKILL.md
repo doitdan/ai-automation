@@ -55,7 +55,7 @@ description: 반복되는 일을 AI에게 새 스킬이나 에이전트로 맡�
 4. **수정 루프.** 지금이든 몇 달 뒤든 틀린 결과는 모두 `references/fix-loop.md`를 거친다.
    실패한 레이어를 두 문장으로 진단하고, 오래가는 가장 작은 수정을 하고, `notes.md`에 한 줄을 더하고, 처음부터 다시 돌리고, 수정 전과 후를 보여 준다.
 5. **배포.** 새 스킬이면 `skills/using-ai-automation/SKILL.md`에 라우팅 행을 더한다.
-   무엇을 바꾸든 `CHANGELOG.md`에 한 줄을 쓰고 `python3 scripts/validate.py`를 돌린다.
+   무엇을 바꾸든 AGENTS.md "버전 규칙"대로 버전을 올리고 `CHANGELOG.md`에 한 줄을 쓴 뒤 `python3 scripts/validate.py`를 돌린다.
    바꾼 스킬을 실제 Codex 세션에서 한 번 돌린다(AGENTS.md "PR 전에"). Codex 밖이라면 그 대화 기록이 아직 남았다고 말한다.
    커밋은 사람이 요청할 때만 한다.
 

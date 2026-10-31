@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 HOOK_SCRIPTS = ["hooks/session-start", "hooks/run-hook.cmd"]
+USER_FACING_PATHS = ["skills", "knowledge", "agents", "hooks", "adapters", "config", "GEMINI.md"]
 
 
 def frontmatter(path):
@@ -79,6 +80,33 @@ def hook_errors():
     ]
 
 
+def current_version():
+    return json.loads((ROOT / ".codex-plugin/plugin.json").read_text())["version"]
+
+
+def git(*args):
+    result = subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True)
+    return result.stdout.strip() if result.returncode == 0 else None
+
+
+def version_bump_errors():
+    last_tag = git("describe", "--tags", "--abbrev=0", "--match", "v[0-9]*")
+    if not last_tag or last_tag[1:] != current_version():
+        return []
+    changed = git("diff", "--name-only", last_tag, "--", *USER_FACING_PATHS)
+    if not changed:
+        return []
+    return [f"user-facing files changed since {last_tag} but version is still {current_version()} — run scripts/bump-version.sh"]
+
+
+def changelog_errors():
+    heading = f"## {current_version()} "
+    lines = (ROOT / "CHANGELOG.md").read_text().splitlines()
+    if any(line.startswith(heading) for line in lines):
+        return []
+    return [f"CHANGELOG.md: missing '{heading.strip()} — <date>' heading"]
+
+
 def render_errors():
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts/render-manifests.py"), "--check"],
@@ -96,6 +124,8 @@ def main():
         + manifest_path_errors()
         + hook_errors()
         + render_errors()
+        + version_bump_errors()
+        + changelog_errors()
     )
     for error in errors:
         print(error, file=sys.stderr)
