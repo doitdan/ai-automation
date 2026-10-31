@@ -1,6 +1,6 @@
 {
   "name": "ai-automation",
   "description": "TODO: 플러그인 한 줄 설명",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "contextFileName": "GEMINI.md"
 }
