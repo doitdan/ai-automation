@@ -5,6 +5,8 @@ description: 반복되는 일을 AI에게 새 스킬이나 에이전트로 맡�
 
 # 위임 루프
 
+먼저 `skills/using-ai-automation/SKILL.md`의 "모든 스킬에 적용"을 따른다.
+
 ## 개요
 
 일 하나에 플레이북 하나를 둔다.

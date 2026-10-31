@@ -10,6 +10,10 @@ ROOT = Path(__file__).resolve().parent.parent
 FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 HOOK_SCRIPTS = ["hooks/session-start", "hooks/run-hook.cmd"]
 CHECKED_DATE = re.compile(r"^확인한 날: \d{4}-\d{2}-\d{2}$", re.M)
+BOOTSTRAP_SKILL = "using-ai-automation"
+SKILL_RULE_MARKERS = ["skills/using-ai-automation/SKILL.md", '"모든 스킬에 적용"']
+AGENT_RULE_MARKERS = ["knowledge/INDEX.md", '"필수 규칙"']
+INDEX_PATH = re.compile(r"^\| `([^`<>]+\.md)`", re.M)
 USER_FACING_PATHS = ["skills", "knowledge", "agents", "hooks", "adapters", "config", "GEMINI.md"]
 
 
@@ -31,6 +35,24 @@ def json_errors():
             json.loads(path.read_text())
         except json.JSONDecodeError as error:
             errors.append(f"{path.relative_to(ROOT)}: invalid JSON ({error})")
+    return errors
+
+
+def preamble(path):
+    body = FRONTMATTER.sub("", path.read_text(), count=1)
+    return body.split("\n## ", 1)[0]
+
+
+def common_rule_errors():
+    errors = []
+    for skill in sorted((ROOT / "skills").glob("*/SKILL.md")):
+        if skill.parent.name == BOOTSTRAP_SKILL:
+            continue
+        if not all(marker in preamble(skill) for marker in SKILL_RULE_MARKERS):
+            errors.append(f"{skill.relative_to(ROOT)}: missing the '모든 스킬에 적용' line before the first ## section")
+    for agent in sorted((ROOT / "agents").glob("*.md")):
+        if not all(marker in preamble(agent) for marker in AGENT_RULE_MARKERS):
+            errors.append(f"{agent.relative_to(ROOT)}: missing the '필수 규칙' line before the first ## section")
     return errors
 
 
@@ -120,6 +142,9 @@ def knowledge_errors():
             errors.append(f"knowledge/{relative}: not listed in knowledge/INDEX.md")
         if relative.startswith("domains/") and not CHECKED_DATE.search(path.read_text()):
             errors.append(f"knowledge/{relative}: missing '확인한 날: YYYY-MM-DD' line")
+    for listed in INDEX_PATH.findall(index):
+        if not (knowledge / listed).exists():
+            errors.append(f"knowledge/INDEX.md: lists missing file {listed}")
     return errors
 
 
@@ -137,6 +162,7 @@ def main():
         json_errors()
         + skill_errors()
         + agent_errors()
+        + common_rule_errors()
         + manifest_path_errors()
         + hook_errors()
         + knowledge_errors()

@@ -4,4 +4,6 @@ description: 무언가를 바꾸기 전에 코드·문서·웹을 조사해 질�
 model: inherit
 ---
 
+먼저 `knowledge/INDEX.md`의 "필수 규칙"에 있는 파일을 읽고 지킨다.
+
 TODO: researcher 프롬프트 본문

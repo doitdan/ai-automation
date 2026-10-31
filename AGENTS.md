@@ -16,6 +16,8 @@ Claude Code·Cursor·Gemini CLI는 어댑터를 거쳐 같은 `skills/`·`knowle
 - 사실과 자료(조사 결과, 참고 데이터, 외부 규칙 원문, 목록, 용어)는 쓰는 스킬이 하나여도 `knowledge/`에 주제별로 둔다. 추가·갱신 규칙은 `knowledge/INDEX.md`에 있다.
 - `skills/<name>/references/`에는 그 업무를 하는 방식만 둔다: 양식, 승인된 예시, 업무 전용 판단 규칙, 하위 프롬프트.
 - 두 스킬 이상이 쓰는 양식과 팀 규칙은 `knowledge/templates/`, `knowledge/rules/`에 둔다.
+- 모든 스킬이 꼭 지킬 규칙은 `knowledge/rules/`에 쓰고 `knowledge/INDEX.md`의 "필수 규칙"에 올린다. 스킬 본문에 복사하지 않는다.
+- 업무 스킬은 제목 바로 아래, 첫 `##` 절보다 앞에 `skills/using-ai-automation/SKILL.md`의 "모든 스킬에 적용"을 먼저 따른다는 줄을 둔다. 에이전트는 첫 `##` 절보다 앞에 `knowledge/INDEX.md`의 "필수 규칙"을 읽고 지킨다는 줄을 둔다. `validate.py`가 검사한다.
 - 요청 → 스킬 표는 `skills/using-ai-automation/SKILL.md`에만 둔다. 요청 → 저장소 표는 `knowledge/routing.md`에만 둔다.
 - 에이전트는 `agents/<name>.md`에만 둔다. `adapters/`에 복사하지 않는다.
 - 사용자마다 다른 값(로컬 경로 등)은 `~/.config/ai-automation/config.json`에 둔다. 이 저장소에 넣지 않는다.
