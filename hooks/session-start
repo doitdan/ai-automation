@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PLUGIN_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+bootstrap=$(cat "${PLUGIN_ROOT}/skills/using-ai-automation/SKILL.md" 2>&1 || echo "Error reading using-ai-automation skill")
+
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+context="<EXTREMELY_IMPORTANT>\nBelow is the full content of your 'ai-automation:using-ai-automation' skill. For all other skills, use the 'Skill' tool:\n\n$(escape_for_json "$bootstrap")\n</EXTREMELY_IMPORTANT>"
+
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  printf '{\n  "additional_context": "%s"\n}\n' "$context"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -z "${COPILOT_CLI:-}" ]; then
+  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$context"
+else
+  printf '{\n  "additionalContext": "%s"\n}\n' "$context"
+fi

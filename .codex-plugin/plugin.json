@@ -1,0 +1,27 @@
+{
+  "name": "ai-automation",
+  "version": "0.1.0",
+  "description": "TODO: 플러그인 한 줄 설명",
+  "author": {
+    "name": "TODO: 회사명",
+    "email": "TODO@example.com"
+  },
+  "license": "UNLICENSED",
+  "keywords": [],
+  "skills": "./skills/",
+  "hooks": {},
+  "interface": {
+    "displayName": "AI Automation",
+    "shortDescription": "TODO: 짧은 설명",
+    "longDescription": "TODO: 긴 설명",
+    "developerName": "TODO: 회사명",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [],
+    "screenshots": []
+  }
+}

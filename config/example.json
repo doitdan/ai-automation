@@ -1,0 +1,5 @@
+{
+  "repositories": {
+    "TODO-repository-name": "/absolute/path/to/TODO-repository"
+  }
+}

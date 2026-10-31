@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ai-automation user config",
+  "type": "object",
+  "required": ["repositories"],
+  "additionalProperties": false,
+  "properties": {
+    "repositories": {
+      "type": "object",
+      "description": "Repository name from knowledge/repositories.md → absolute local path",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

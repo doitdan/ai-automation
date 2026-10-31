@@ -1,0 +1,14 @@
+{
+  "name": "ai-automation",
+  "displayName": "AI Automation",
+  "description": "TODO: 플러그인 한 줄 설명",
+  "version": "0.1.0",
+  "author": {
+    "name": "TODO: 회사명",
+    "email": "TODO@example.com"
+  },
+  "license": "UNLICENSED",
+  "keywords": [],
+  "skills": "./skills/",
+  "hooks": "./adapters/cursor/hooks.json"
+}
