@@ -1,59 +1,73 @@
-# Fix Loop
+# 수정 루프
 
-A wrong result is fixed in the playbook so the next run does not repeat it. Enter here directly when an existing skill or agent gave a wrong result; skip the gate and the interview.
+틀린 결과는 플레이북에서 고친다.
+그래야 다음 실행이 같은 실수를 하지 않는다.
+이미 있는 스킬이나 에이전트가 틀린 결과를 냈으면 여기서 바로 시작한다.
+관문과 인터뷰는 건너뛴다.
 
-## 1. Describe
+## 1. 적기
 
-Write exactly what went wrong: which output, which part, what it said, what it should have said.
+무엇이 틀렸는지 정확히 적는다.
+어느 결과물의 어느 부분이 무엇이라고 했고, 무엇이라고 했어야 하는지다.
 
-## 2. Diagnose the layer
+## 2. 레이어 진단
 
-| Layer | Signs |
-|-------|-------|
-| Process | A step is missing, in the wrong order, or a decision's rule was never written down |
-| Toolbox | Something was rebuilt that already exists, or a saved file is outdated or wrong |
-| Proof | No check would have caught the mistake |
+| 레이어 | 신호 |
+|--------|------|
+| 프로세스 | 단계가 빠졌거나, 순서가 틀렸거나, 판단 규칙을 적어 두지 않았다 |
+| 툴박스 | 이미 있는 것을 다시 만들었거나, 저장한 파일이 낡았거나 틀렸다 |
+| 증명 | 이 실수를 잡을 확인 항목이 없다 |
 
-Has this happened before? It has when `notes.md` records it or your partner says so.
+전에도 있었던 일인지 본다.
+`notes.md`에 있거나 사람이 그렇다고 하면 전에도 있었던 일이다.
 
-Tell your partner the layer and why in two sentences. A failure can sit in two layers, for example a made-up number is a process gap (no rule on where numbers come from) and a proof gap (no check that traces them). Name both and fix both.
+실패한 레이어와 이유를 두 문장으로 사람에게 알린다.
+실패는 두 레이어에 걸칠 수 있다.
+예를 들어 지어낸 숫자는 프로세스 빈틈(숫자를 어디서 가져올지 규칙이 없음)이자 증명 빈틈(숫자를 추적하는 확인이 없음)이다.
+둘 다 짚고 둘 다 고친다.
 
-## 3. Smallest durable fix
+## 3. 가장 작은 내구성 있는 수정
 
-- Change only the failed layer. Never rewrite the whole playbook.
-- Process → add or reorder the step, or write the decision as "If X, then Y".
-- Toolbox → replace the outdated file, or point the step at the file it ignored.
-- Proof → add the check that would have failed, as a script when it is mechanical.
-- The same mistake twice → an explicit rule that blocks it, ideally a check that fails, not a softer reminder.
-- The fix needs a rule only your partner can set (for example whether a calculated metric counts as sourced) → apply the safest rule now and ask the question in your report.
-- `notes.md` or `references/INDEX.md` missing → create them as `skill-template.md` describes.
+- 실패한 레이어만 바꾼다. 플레이북 전체를 다시 쓰지 않는다.
+- 프로세스 → 단계를 더하거나 순서를 바꾸거나, 판단을 "X면 Y"로 적는다.
+- 툴박스 → 낡은 파일을 바꾸거나, 단계가 무시한 파일을 가리키게 한다.
+- 증명 → 실패했을 확인 항목을 더한다. 기계적이면 스크립트로 만든다.
+- 같은 실수가 두 번째면 부드러운 당부가 아니라 막는 규칙을 넣는다. 가능하면 실패하는 확인 항목으로 만든다.
+- 사람만 정할 수 있는 규칙이 필요하면(예: 계산한 지표도 원본에서 온 것으로 칠지) 지금은 가장 안전한 규칙을 적용하고 보고에서 묻는다.
+- `notes.md`나 `references/INDEX.md`가 없으면 `skill-template.md`대로 만든다.
 
-## 4. Log
+## 4. 기록
 
-Add one line at the top of `skills/<job>/notes.md`, under the heading:
+`skills/<job>/notes.md`의 제목 바로 아래, 맨 위에 한 줄을 더한다.
 
 ```
-- 2026-10-31 | proof | CTR 3.2% not in the export | added check-numbers.py to Done when
+- 2026-10-31 | 증명 | CTR 3.2%가 내보내기 파일에 없음 | 완료 조건에 check-numbers.py 추가
 ```
 
-Format: date | layer | what went wrong | what changed. Newest first.
+형식은 날짜 | 레이어 | 틀린 것 | 바꾼 것이다.
+최신 줄이 맨 위다.
 
-## 5. Rerun and compare
+## 5. 다시 돌려 비교
 
-Rerun the same job from scratch with the same input. Show before and after side by side, with the proof report. The fix counts only when the after run passes.
+같은 입력으로 일을 처음부터 다시 돌린다.
+수정 전과 후를 나란히 보여 주고, 증명 보고를 붙인다.
+수정 후 실행이 통과해야 수정으로 친다.
 
-The original input is not available → build a made-up input that reproduces the failure, show before and after on it, say the real rerun is still owed, and tell your partner not to use the real output until it is done.
+원래 입력을 구할 수 없으면 실패를 재현하는 가짜 입력을 만든다.
+그 입력으로 전후를 보여 주고, 실제 입력으로 다시 돌리는 일이 남았다고 밝힌다.
+그 일을 하기 전에는 실제 결과물을 쓰지 말라고 사람에게 알린다.
 
-## 6. Close
+## 6. 마무리
 
-- `CHANGELOG.md` line and `python3 scripts/validate.py`.
-- Fewer than five checks in `## Done when` → offer a Phase 3 pass (`proof.md`) as the next step.
-- The skill has no routing row → propose one; do not add it unasked.
+- `CHANGELOG.md`에 한 줄을 더하고 `python3 scripts/validate.py`를 돌린다.
+- `## 완료 조건`의 항목이 5개보다 적으면 다음 단계로 증명 작업(`proof.md`)을 제안한다.
+- 스킬이 요청 → 스킬 표에 없으면 줄을 더하자고 제안한다. 묻지 않고 더하지 않는다.
 
-## Monthly
+## 한 달에 한 번
 
-Read `notes.md` once a month. Several lines in the same layer mean that layer needs a bigger rework, or that part of the job is a candidate for the next skill.
+`notes.md`를 읽는다.
+같은 레이어에 줄이 여럿이면 그 레이어를 크게 다시 손봐야 하거나, 그 부분이 다음 스킬 후보다.
 
-## If you cannot write files
+## 파일을 쓸 수 없으면
 
-Print the full changed file, the exact path, and tell your partner to replace the old copy.
+바뀐 파일 전체와 정확한 경로를 보여 주고, 예전 사본을 바꾸라고 알린다.

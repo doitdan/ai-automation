@@ -45,8 +45,8 @@ def skill_errors():
             continue
         if meta.get("name", "").strip() != skill_dir.name:
             errors.append(f"{skill.relative_to(ROOT)}: name must be {skill_dir.name}")
-        if not meta.get("description", "").strip().startswith("Use when"):
-            errors.append(f"{skill.relative_to(ROOT)}: description must start with 'Use when'")
+        if not meta.get("description", "").strip():
+            errors.append(f"{skill.relative_to(ROOT)}: missing description")
     return errors
 
 

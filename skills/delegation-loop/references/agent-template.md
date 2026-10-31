@@ -1,54 +1,60 @@
-# Agent Template
+# 에이전트 양식
 
-Build an agent only when the gate says a step needs a fresh context. The agent is one prompt file; the job's knowledge still lives in a skill's `references/` or in `knowledge/`.
+관문에서 어떤 단계에 새 맥락이 필요하다고 나왔을 때만 에이전트를 만든다.
+에이전트는 프롬프트 파일 하나다.
+일에 대한 지식은 여전히 스킬의 `references/`나 `knowledge/`에 둔다.
 
-## The file
+## 파일
 
 `agents/<name>.md`:
 
 ````markdown
 ---
 name: <name>
-description: Use when <the step in the calling skill that needs a fresh context>
+description: <새 맥락이 필요한, 호출하는 스킬의 단계>를 맡길 때 쓴다
 model: inherit
 ---
 
-You are <role in one line>.
+너는 <한 줄로 쓴 역할>이다.
 
-## Input
+## 입력
 
-You receive: <exactly what the calling skill passes: file paths, the item to process, the checks to run>.
+받는 것: <호출하는 스킬이 넘기는 것 그대로: 파일 경로, 처리할 항목, 돌릴 검사>.
 
-## Read first
+## 먼저 읽을 것
 
-- `skills/<job>/references/<file>` <why>
-- `knowledge/<file>` <why>
+- `skills/<job>/references/<file>` <이유>
+- `knowledge/<file>` <이유>
 
-## Do
+## 할 일
 
-1. <step>
-2. <step>
+1. <단계>
+2. <단계>
 
-## Do not
+## 하지 말 것
 
-- Change files outside <scope>.
-- Pass anything you could not verify.
+- <범위> 밖의 파일을 바꾸지 않는다.
+- 확인하지 못한 것을 통과시키지 않는다.
 
-## Return
+## 반환
 
-<The exact shape of the answer, in order. Example for a reviewer: one line per check, PASS or FAIL, evidence; then the list of checks that could not be run.>
+<답의 정확한 모양과 순서. 검토자라면 예를 들어 검사마다 한 줄씩 PASS나 FAIL과 근거를 쓰고, 그다음 돌리지 못한 검사 목록을 쓴다.>
 ````
 
-## Wire it into the calling skill
+## 호출하는 스킬에 연결하기
 
-Add a step to `skills/<job>/SKILL.md`:
+`skills/<job>/SKILL.md`에 단계를 하나 더한다.
 
 ```markdown
-4. Dispatch a subagent with the body of `agents/<name>.md` as its prompt. Pass <inputs>. Use its return as <what>.
+4. `agents/<name>.md` 본문을 프롬프트로 서브에이전트를 띄운다. <입력>을 넘긴다. 돌아온 답을 <용도>로 쓴다.
 ```
 
-Codex and Gemini CLI do not load `agents/` natively: the skill reads the file and spawns a subagent with its body (see `adapters/codex/README.md`). Claude Code and Cursor load it natively. Never copy the agent into `adapters/`.
+Codex와 Gemini CLI는 `agents/`를 직접 읽지 않는다.
+그래서 스킬이 파일을 읽고 그 본문으로 서브에이전트를 띄운다(`adapters/codex/README.md` 참고).
+Claude Code와 Cursor는 직접 읽는다.
+에이전트를 `adapters/`에 절대 복사하지 않는다.
 
-## Proof for an agent
+## 에이전트의 증명
 
-The calling skill's `## Done when` covers the agent's output. Add one check that the return has the shape in `## Return`.
+호출하는 스킬의 `## 완료 조건`이 에이전트의 출력을 다룬다.
+반환이 `## 반환`에 적은 모양인지 보는 검사를 하나 더한다.

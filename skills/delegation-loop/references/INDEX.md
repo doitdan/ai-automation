@@ -1,12 +1,12 @@
-# Files
+# 파일
 
-| File | Purpose | Added |
-|------|---------|-------|
-| `gate.md` | Qualify the job, find overlaps, choose skill, agent, or knowledge file, name it | 2026-10-31 |
-| `interview.md` | One-question-at-a-time interview over eight topics | 2026-10-31 |
-| `skill-template.md` | SKILL.md skeleton for a new job | 2026-10-31 |
-| `agent-template.md` | Agent file skeleton and how a skill dispatches it | 2026-10-31 |
-| `toolbox.md` | What to save after an approved run, where, and the second-run report | 2026-10-31 |
-| `proof.md` | Writing and running checks that can fail | 2026-10-31 |
-| `fix-loop.md` | Diagnose the failed layer, fix, log, rerun | 2026-10-31 |
-| `examples.md` | One job through every phase | 2026-10-31 |
+| 파일 | 용도 | 추가한 날 |
+|------|------|-----------|
+| `gate.md` | 일이 조건을 갖췄는지 보고, 겹치는 것을 찾고, 스킬·에이전트·지식 파일 중 하나를 고르고, 이름을 짓는다 | 2026-10-31 |
+| `interview.md` | 여덟 주제를 한 번에 하나씩 묻는 인터뷰 | 2026-10-31 |
+| `skill-template.md` | 새 일을 위한 SKILL.md 뼈대 | 2026-10-31 |
+| `agent-template.md` | 에이전트 파일 뼈대와 스킬이 에이전트를 띄우는 방법 | 2026-10-31 |
+| `toolbox.md` | 승인된 실행 뒤에 무엇을 어디에 저장하는지, 두 번째 실행 보고 | 2026-10-31 |
+| `proof.md` | 실패할 수 있는 검사를 쓰고 돌리는 방법 | 2026-10-31 |
+| `fix-loop.md` | 실패한 레이어를 진단하고, 고치고, 기록하고, 다시 돌리는 방법 | 2026-10-31 |
+| `examples.md` | 일 하나를 모든 단계에 걸쳐 따라간 예시 | 2026-10-31 |

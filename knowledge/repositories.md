@@ -1,9 +1,10 @@
-# Repositories
+# 저장소
 
-| Repository | Role | GitHub |
-|------------|------|--------|
+| 저장소 | 역할 | GitHub |
+|--------|------|--------|
 | TODO | TODO | TODO |
 | TODO | TODO | TODO |
 | TODO | TODO | TODO |
 
-Local paths are not here. They live in each user's `~/.config/ai-automation/config.json` under `repositories`.
+로컬 경로는 여기 적지 않는다.
+각 사용자의 `~/.config/ai-automation/config.json` 안 `repositories`에 있다.

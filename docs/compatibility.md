@@ -1,8 +1,8 @@
-# Compatibility
+# 호환성
 
-| Harness | Version checked | Install | Session hook | Agents |
-|---------|-----------------|---------|--------------|--------|
-| Codex | TODO | TODO | none | via skill |
-| Claude Code | TODO | TODO | yes | native |
-| Cursor | not checked | not checked | yes | via skill |
-| Gemini CLI | TODO | TODO | none | via skill |
+| 하네스 | 확인한 버전 | 설치 | 세션 시작 훅 | 에이전트 |
+|--------|-------------|------|--------------|----------|
+| Codex | TODO | TODO | 없음 | 스킬을 거쳐서 |
+| Claude Code | TODO | TODO | 있음 | 직접 읽음 |
+| Cursor | 확인 안 함 | 확인 안 함 | 있음 | 스킬을 거쳐서 |
+| Gemini CLI | TODO | TODO | 없음 | 스킬을 거쳐서 |

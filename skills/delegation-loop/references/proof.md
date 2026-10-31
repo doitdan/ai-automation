@@ -1,62 +1,69 @@
-# Proof
+# 증명
 
-The AI saying the result looks fine is not evidence. Proof is a short list of checks that can fail, each backed by something outside the AI's own judgment.
+AI가 결과가 괜찮아 보인다고 말하는 것은 근거가 아니다.
+증명은 실패할 수 있는 짧은 확인 항목 목록이다.
+항목마다 AI 자신의 판단 밖에 있는 근거가 있다.
 
-## Evidence that counts
+## 근거로 인정하는 것
 
-- A number traced to the source file it came from
-- A link that opens
-- A screenshot of the rendered output
-- A test that passes
-- A claim matched against a quote
-- A count (words, rows, items)
-- A value matched against a reference file
+- 원본 파일까지 추적되는 숫자
+- 열리는 링크
+- 화면에 그려진 결과의 스크린샷
+- 통과하는 테스트
+- 인용과 맞춰 본 주장
+- 개수(단어, 행, 항목)
+- 참조 파일과 맞춰 본 값
 
-## Writing the checks
+## 항목 쓰는 법
 
-- 5 to 10 checks, specific to this job.
-- Each check names what it is compared against.
-- No quality adjectives: "clear", "professional", "high-quality", "accurate", "natural".
-- Turn each "what bad looks like" answer from the interview into a check.
-- A mechanical check (counting, matching numbers) becomes a script in `scripts/` and the check says to run it.
+- 이 일에만 맞는 항목을 5~10개 쓴다.
+- 항목마다 무엇과 맞춰 보는지 적는다.
+- 품질 형용사를 쓰지 않는다: "명확한", "전문적인", "고품질", "정확한", "자연스러운"
+- 인터뷰의 "나쁜 결과" 답을 하나씩 항목으로 바꾼다.
+- 기계적인 확인(개수 세기, 숫자 맞추기)은 `scripts/`의 스크립트로 만들고, 항목에 그 스크립트를 돌리라고 적는다.
 
-| Not a check | A check |
-|-------------|---------|
-| Numbers are accurate | Every number in the email appears in this week's export (`scripts/check-numbers.py` prints `ok`) |
-| Concise | Body is 200 words or fewer |
-| Right client | Client name matches the team's client sheet exactly |
-| Professional tone | No word from `references/RULE.md` banned list appears |
-| Follows up | Mentions every promise in last week's sent email |
+| 항목이 아닌 것 | 항목 |
+|----------------|------|
+| 숫자가 정확하다 | 메일의 모든 숫자가 이번 주 내보내기 파일에 있다(`scripts/check-numbers.py`가 `ok`를 출력한다) |
+| 간결하다 | 본문이 200단어 이하다 |
+| 고객사가 맞다 | 고객사 이름이 팀의 고객 시트와 정확히 같다 |
+| 전문적인 말투 | `references/RULE.md` 금지어 목록의 단어가 없다 |
+| 후속 조치를 챙긴다 | 지난주 보낸 메일의 약속을 모두 언급한다 |
 
-## Checker jobs
+## 검사형 일
 
-A job that finds problems in someone's output (a compliance check, a reviewer agent) needs proof that it catches what it should and leaves the rest alone.
+남의 결과에서 문제를 찾는 일(규정 검사, 검토 에이전트)은 잡아야 할 것은 잡고 나머지는 건드리지 않는다는 증명이 필요하다.
 
-- Keep a set of known-bad inputs: each planted problem must be flagged. Grow it with every problem the checker once missed.
-- Keep a set of known-clean inputs: they must produce no flags.
-- Every flag quotes text that really appears in the input and names the rule it breaks.
+- 위반이 든 입력 묶음을 둔다. 심어 둔 문제는 하나도 빠짐없이 잡혀야 한다. 검사기가 한 번이라도 놓친 문제는 이 묶음에 더한다.
+- 깨끗한 입력 묶음을 둔다. 지적이 하나도 나오지 않아야 한다.
+- 지적마다 입력에 실제로 있는 문장을 인용하고, 어긴 규칙을 적는다.
 
-Store both sets under `scripts/fixtures/` with each input's expected flags. Run the checker on every fixture, save its returns, and let a script score them against the expected flags. Rerun the whole set after every change to the checker.
+두 묶음은 입력마다 기대하는 지적과 함께 `scripts/fixtures/`에 둔다.
+모든 입력에 검사기를 돌리고, 돌려받은 답을 저장하고, 스크립트로 기대한 지적과 맞춰 채점한다.
+검사기를 바꿀 때마다 묶음 전체를 다시 돌린다.
 
-A checker's PASS is not clearance. When the rules are legal or regulatory, the final call is a `Person:` step and the report says so.
+검사기의 통과는 승인이 아니다.
+법이나 규제 규칙이면 최종 판단은 `Person:` 단계이고, 보고서에도 그렇게 적는다.
 
-## Running the checks
+## 항목 돌리는 법
 
-From now on, whenever the job is finished and before showing anything:
+이제부터 일이 끝나면 무엇이든 보여 주기 전에 아래를 한다.
 
-1. Run every check.
-2. Fix what failed.
-3. Run every check again.
-4. Report one line per check: `PASS` or `FAIL`, then the evidence.
-5. List what could not be verified and why. Never count it as passed.
+1. 모든 항목을 돌린다.
+2. 실패한 것을 고친다.
+3. 모든 항목을 다시 돌린다.
+4. 항목마다 한 줄로 `PASS`나 `FAIL`, 그리고 근거를 보고한다.
+5. 확인하지 못한 것과 그 이유를 적는다. 통과로 치지 않는다.
 
 ```
-PASS  numbers traced: check-numbers.py printed ok (14 numbers)
-PASS  length: 176 words
-FAIL  last week's promise: "landing page A/B result" not mentioned → added, rerun PASS
-SKIP  link opens: no network in this session
+PASS  숫자 추적: check-numbers.py가 ok 출력 (숫자 14개)
+PASS  길이: 176단어
+FAIL  지난주 약속: "랜딩 페이지 A/B 결과" 언급 없음 → 추가 후 다시 돌려 PASS
+SKIP  링크 열림: 이 세션은 네트워크가 없음
 ```
 
-## Stop rule
+## 멈춤 규칙
 
-More than two checks fail on the first pass → stop. Do not patch the output. Name the process step that produced the failures and go to `fix-loop.md`.
+첫 실행에서 2개보다 많이 실패하면 멈춘다.
+결과를 땜질하지 않는다.
+실패를 만든 프로세스 단계를 짚고 `fix-loop.md`로 간다.

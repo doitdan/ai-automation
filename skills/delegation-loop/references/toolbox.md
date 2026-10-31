@@ -1,59 +1,65 @@
-# Toolbox
+# 툴박스
 
-The toolbox fills itself on the first good run and pays off on the second.
+툴박스는 첫 번째 좋은 실행에서 채워지고 두 번째 실행에서 효과를 낸다.
 
-## When to save
+## 언제 저장하나
 
-Right after your partner approves a result. Not before.
+사람이 결과를 승인한 직후다.
+그 전에는 저장하지 않는다.
 
-One exception: a rule file taken from a primary source (law, platform policy) is written before the first run, because the first run needs it.
+예외는 하나다.
+원문(법, 플랫폼 정책)에서 가져온 규칙 파일은 첫 실행 전에 쓴다.
+첫 실행에 그 파일이 필요하기 때문이다.
 
-## What to save
+## 무엇을 저장하나
 
-| Kind | Example | Where |
-|------|---------|-------|
-| Mechanical step as a script | pulling numbers out of an export | `scripts/<verb-noun>.py` with a small test |
-| Template with placeholders | the email skeleton | `references/<name>-template.md` |
-| Reference data | price list, link list, product names | `references/<name>.md`, or `knowledge/` when another skill needs it |
-| Approved example | an output your partner sent as-is | `references/examples/<YYYY-MM-DD>-<label>.md` |
-| Rule file | tone, format, banned words | `references/RULE.md`, or `knowledge/rules/` when shared |
-| Repeated sub-prompt | a prompt reused inside a step | `references/<name>-prompt.md` |
+| 종류 | 예 | 위치 |
+|------|----|------|
+| 기계적 단계의 스크립트 | 내보내기 파일에서 숫자 뽑기 | `scripts/<동사-명사>.py`와 작은 테스트 |
+| 자리표시자 양식 | 메일 뼈대 | `references/<name>-template.md` |
+| 참조 자료 | 가격표, 링크 목록, 상품명 | `references/<name>.md`, 다른 스킬도 쓰면 `knowledge/` |
+| 승인된 예시 | 사람이 그대로 보낸 결과물 | `references/examples/<YYYY-MM-DD>-<label>.md` |
+| 규칙 파일 | 말투, 형식, 금지어 | `references/RULE.md`, 함께 쓰면 `knowledge/rules/` |
+| 반복 하위 프롬프트 | 한 단계 안에서 다시 쓰는 프롬프트 | `references/<name>-prompt.md` |
 
-## What not to save
+## 저장하지 않는 것
 
-- One-off outputs.
-- Passwords, API keys, tokens, customer personal data.
-- Client-confidential data: client names, recipients, account IDs, real results. The whole team installs this repo. Save an approved example with made-up names and numbers (업체 A, rounded fake figures), and keep the real client list where the team already keeps it; the skill points to that location.
-- Drafts your partner has not approved.
+- 한 번 쓰고 끝나는 결과물
+- 비밀번호, API 키, 토큰, 고객 개인정보
+- 고객사 기밀: 고객사 이름, 수신자, 계정 ID, 실제 성과 수치. 팀 전체가 이 저장소를 설치한다.
+- 사람이 승인하지 않은 초안
 
-## How to save
+승인된 예시는 가짜 이름과 숫자(업체 A, 반올림한 가짜 수치)로 저장한다.
+실제 고객 목록은 팀이 이미 두는 곳에 그대로 두고, 스킬은 그 위치를 가리킨다.
 
-1. Save under a descriptive name. No dates or version numbers in tool names (`numbers-pull.py`, not `numbers-pull-v2.py`). Examples are the one exception: they carry the date they were approved.
-2. Replace job-specific parts with `[bracketed placeholders]`. Keep one filled example directly below.
-3. Edit the step in `SKILL.md` that uses it: name the file, when to use it, and when not to.
-4. Add one row to `references/INDEX.md` for every saved file, scripts included (`../scripts/numbers-pull.py`). Create the index if it is missing.
-5. A script gets a small test beside it (`scripts/test_<name>.py`). Run it with `python3 -m unittest discover -s scripts -p 'test_*.py'` from the skill folder.
-6. A file two or more skills need goes to `knowledge/` with a row in `knowledge/INDEX.md`. Point to it; never copy it.
+## 저장하는 법
+
+1. 내용을 알 수 있는 이름으로 저장한다. 도구 이름에는 날짜나 버전을 넣지 않는다(`numbers-pull-v2.py`가 아니라 `numbers-pull.py`). 예시만 승인한 날짜를 붙인다.
+2. 일마다 바뀌는 부분을 `[대괄호 자리표시자]`로 바꾸고, 바로 아래에 채운 예를 하나 남긴다.
+3. 그 파일을 쓰는 `SKILL.md` 단계를 고친다. 파일 이름, 쓸 때, 쓰지 않을 때를 적는다.
+4. 저장한 파일마다 `references/INDEX.md`에 한 줄을 더한다. 스크립트도 적는다(`../scripts/numbers-pull.py`). 색인이 없으면 만든다.
+5. 스크립트 옆에는 작은 테스트(`scripts/test_<name>.py`)를 둔다. 스킬 폴더에서 `python3 -m unittest discover -s scripts -p 'test_*.py'`로 돌린다.
+6. 두 스킬 이상이 쓰는 파일은 `knowledge/`에 두고 `knowledge/INDEX.md`에 한 줄을 더한다. 복사하지 않고 경로를 가리킨다.
 
 `references/INDEX.md`:
 
 ```markdown
-# Files
+# 파일
 
-| File | Purpose | Added |
-|------|---------|-------|
-| `client-update-template.md` | Email skeleton with placeholders | 2026-10-31 |
+| 파일 | 용도 | 추가한 날 |
+|------|------|-----------|
+| `client-update-template.md` | 자리표시자가 든 메일 뼈대 | 2026-10-31 |
 ```
 
-## Second run
+## 두 번째 실행
 
-Rerun the whole job from scratch, then report:
+일을 처음부터 다시 돌리고 보고한다.
 
-- saved files that were used
-- anything rebuilt from nothing, each with "save next: <file name>"
+- 쓴 저장 파일
+- 처음부터 다시 만든 것. 각각 "다음에 저장: <파일 이름>"을 붙인다.
 
-## Upkeep
+## 관리
 
-- One file per purpose. A new version replaces the old file; it never sits beside it.
-- Two files with similar names doing different things → rename one so they cannot be confused.
-- Once a month, delete files `INDEX.md` lists but no step uses.
+- 용도 하나에 파일 하나다. 새 버전은 옛 파일을 바꾸고, 옆에 두지 않는다.
+- 이름이 비슷한데 하는 일이 다른 파일 둘이 있으면 헷갈리지 않게 하나의 이름을 바꾼다.
+- 한 달에 한 번, `INDEX.md`에는 있는데 어느 단계도 쓰지 않는 파일을 지운다.

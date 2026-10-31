@@ -1,4 +1,4 @@
-# Installation
+# 설치
 
 Codex
 
@@ -22,4 +22,5 @@ gemini extensions install https://github.com/doitdan/ai-automation
 
 Cursor: TODO
 
-After installing, the first session runs the setup in `skills/using-ai-automation/references/setup.md`. See `configuration.md`.
+설치한 뒤 첫 세션에서 `skills/using-ai-automation/references/setup.md`의 초기 설정을 진행한다.
+자세한 내용은 `configuration.md`를 본다.

@@ -1,7 +1,8 @@
-# Request → Repository
+# 요청 → 저장소
 
-Request → skill routing lives in `skills/using-ai-automation/SKILL.md`. This file maps a request to the repository or service it concerns.
+요청 → 스킬 표는 `skills/using-ai-automation/SKILL.md`에 있다.
+이 파일은 요청이 어느 저장소나 서비스의 일인지만 정한다.
 
-| Request mentions | Repository |
-|------------------|------------|
+| 요청에 나오는 말 | 저장소 |
+|------------------|--------|
 | TODO | TODO |

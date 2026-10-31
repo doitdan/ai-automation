@@ -1,64 +1,68 @@
-# Skill Template
+# 스킬 양식
 
-Copy this into `skills/<job>/SKILL.md` and fill every slot from the interview. A slot you cannot fill is a question you have not asked yet.
+아래를 `skills/<job>/SKILL.md`에 복사하고 인터뷰 내용으로 모든 칸을 채운다.
+채울 수 없는 칸은 아직 묻지 않은 질문이다.
 
 ````markdown
 ---
 name: <job>
-description: Use when <the situation in plain words>, or when someone says "<phrase 1>", "<phrase 2>", "<phrase 3>"
+description: <어떤 상황에서> 쓴다. "<요청 문구 1>", "<요청 문구 2>", "<요청 문구 3>"
 ---
 
-# <Job title>
+# <업무 이름>
 
-<Purpose in one line: what this produces, for whom.>
+<한 줄 목적: 누구에게 무엇을 만들어 주는지>
 
-## When to Use
+## 실행 조건
 
-- "<words your partner types to start it>"
-- "<another real phrasing>"
-- Not for: <the neighbouring job this must not be confused with>
+- "<사람이 시작할 때 치는 말>"
+- "<실제로 쓰는 다른 표현>"
+- 쓰지 않는 경우: <헷갈리기 쉬운 옆 업무>
 
-## Inputs
+## 입력
 
-| Input | Location | Format |
-|-------|----------|--------|
-| <input> | <shared location, or the role it plays when it differs per person> | <CSV, Notion page, ...> |
+| 입력 | 위치 | 형식 |
+|------|------|------|
+| <입력> | <공유 위치, 또는 사람마다 다르면 그 역할> | <CSV, 노션 페이지 등> |
 
-## Steps
+## 단계
 
-1. <Plain-language step. Name the file it uses: "Fill `references/TEMPLATE.md`".>
-2. <Next step in the order your partner really works.>
-3. Person: <decision that stays with a person>.
+파일 목록은 `references/INDEX.md`에 있다.
 
-## Decisions
+1. <쉬운 말로 쓴 단계. 쓰는 파일 이름을 적는다. 예: "`references/report-template.md`를 채운다">
+2. <사람이 실제로 일하는 순서의 다음 단계>
+3. Person: <사람에게 남기는 판단>
 
-- If <X>, then <Y>.
-- If <X>, then <Y>.
+## 결정 규칙
 
-## Done when
+- <X>면 <Y>한다.
+- <X>면 <Y>한다.
 
-Run every check before showing anything. Report one line per check: pass or fail, and its evidence. Say which checks could not be run and why.
+## 예외
 
-- [ ] <check that a file, count, link, test, or quote can fail>
-- [ ] <5 to 10 checks in total; see delegation-loop proof.md>
+- <흐름이 깨졌던 지난 경우> → <할 일>
 
-## Edge Cases
+## 완료 조건
 
-- <past case that broke the flow> → <what to do>
+무엇이든 보여 주기 전에 모든 항목을 돌린다.
+항목마다 한 줄로 통과·실패와 근거를 보고한다.
+돌리지 못한 항목은 그 이유를 적는다.
 
-## Files
-
-See `references/INDEX.md`.
+- [ ] <파일, 개수, 링크, 테스트, 인용으로 실패할 수 있는 항목>
+- [ ] <모두 5~10개. delegation-loop의 proof.md를 따른다>
 ````
 
-## Rules for filling it
+## 채우는 규칙
 
-- `description` says only when to use the skill. No workflow summary. It starts with "Use when" (`scripts/validate.py` checks this).
-- Trigger phrases are what people really type, in their language. A vague trigger such as "help with content" never loads.
-- A shared location (a team drive folder, a Notion database) is written as is. A location that differs per person, such as a local download folder, is never written into the skill: name the input by its role ("this week's export the user names") and ask for it at run time.
-- Steps are numbered and plain. No jargon your partner did not use.
-- Sending, publishing, paying, or deleting outside the repo is a `Person:` step unless `knowledge/rules/approval.md` says otherwise.
-- Every step that uses a toolbox file names it.
-- Every decision is "If X, then Y". "Use judgment" is not a decision.
-- `## Done when` starts empty or with your partner's own checks; phase 3 fills it (`proof.md`).
-- Also create `skills/<job>/notes.md` containing only the heading `# Notes`, and `skills/<job>/references/INDEX.md` from `toolbox.md`.
+- `description`에는 언제 쓰는지만 쓴다. 절차를 요약하지 않는다.
+- 요청 문구는 사람이 실제로 치는 말을 따옴표로 쓴다. 한국어와 영어 표현이 둘 다 쓰이면 둘 다 넣는다.
+- "콘텐츠 도와줘" 같은 흐린 문구로는 스킬이 불리지 않는다.
+- 공유 위치(팀 드라이브 폴더, 노션 데이터베이스)는 그대로 쓴다.
+- 사람마다 다른 위치(로컬 다운로드 폴더 등)는 스킬에 쓰지 않는다. 입력을 역할로 부르고("사람이 알려 주는 이번 주 내보내기 파일") 실행할 때 묻는다.
+- 단계는 번호를 매기고, 한 단계에 행동 하나만 쓴다. 사람이 쓰지 않은 전문 용어는 쓰지 않는다.
+- 툴박스 파일을 쓰는 단계는 그 파일 이름을 적는다.
+- 결정은 모두 "X면 Y"로 쓴다. "알아서 판단한다"는 결정이 아니다.
+- 저장소 밖으로 보내기, 게시, 결제, 삭제는 `Person:` 단계다. `knowledge/rules/approval.md`가 달리 정하면 그것을 따른다.
+- `## 완료 조건`은 비워 두거나 사람이 말한 확인만 적는다. 3단계에서 채운다(`proof.md`).
+- `skills/<job>/notes.md`도 만든다. 내용은 `# 수정 기록` 제목 한 줄이다.
+- `skills/<job>/references/INDEX.md`는 `toolbox.md`의 양식으로 만든다.

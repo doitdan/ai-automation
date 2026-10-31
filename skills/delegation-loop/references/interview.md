@@ -1,47 +1,64 @@
-# Interview
+# 인터뷰
 
-The interview pulls out the judgment your partner uses without noticing. Do not write the steps yourself; the detail that makes the playbook work is usually the one nobody wrote down.
+인터뷰는 사람이 의식하지 못하고 쓰는 판단을 꺼낸다.
+단계를 직접 지어 쓰지 않는다.
+플레이북을 살리는 세부는 대개 아무도 적어 두지 않은 것이다.
 
-## How to ask
+## 묻는 법
 
-- One question per message, and one thing per question. "뭐라고 입력하세요? 얼마나 자주 하세요?" is two questions. Wait for the answer before the next one.
-- At least eight questions. Keep going until your partner says they are done.
-- A topic the request already answered counts as covered. Spend that question on a deeper follow-up, never on repeating it.
-- Do not write any file during the interview.
-- Ask for real material early: a past output they were happy with, the input it came from, a bad version.
-- Follow up on vague answers with "what exactly do you look at?" or "what would make you redo it?"
-- Keep a private checklist of the eight topics below. Before you stop, every topic has an answer.
+- 메시지 하나에 질문 하나, 질문 하나에 한 가지만 묻는다.
+  "뭐라고 입력하세요? 얼마나 자주 하세요?"는 질문 둘이다.
+- 답을 받은 뒤에 다음 질문을 보낸다.
+- 질문은 8개 이상이다.
+  사람이 끝났다고 할 때까지 계속한다.
+- 요청에서 이미 답한 주제는 다룬 것으로 친다.
+  그 질문은 되묻지 말고 더 깊은 꼬리 질문에 쓴다.
+- 인터뷰 중에는 어떤 파일도 쓰지 않는다.
+- 실제 자료는 일찍 받는다.
+  만족했던 지난 결과, 그 결과의 입력, 나쁜 결과다.
+- 답이 흐리면 "정확히 무엇을 보세요?", "어떻게 되면 다시 하라고 하세요?"로 파고든다.
+- 아래 8개 주제를 속으로 체크한다.
+  멈추기 전에 모든 주제에 답이 있어야 한다.
 
-## The eight topics
+## 8개 주제
 
-| # | Topic | What you need to come away with | Example question |
-|---|-------|--------------------------------|------------------|
-| 1 | Trigger and frequency | The exact words they would type to start it, and how often | 이 일을 AI에게 시킬 때 실제로 뭐라고 입력하실 것 같으세요? (next message: 얼마나 자주 하세요?) |
-| 2 | Inputs and locations | Every input with its exact location and format | 이 일에 쓰는 자료는 각각 어디에 있고 어떤 형식인가요? |
-| 3 | Steps in real order | The order they actually work in, not the official SOP | 지난번에 이 일을 했을 때 맨 처음 뭘 열어 보셨어요? 그다음은요? |
-| 4 | Decisions and rules | Every fork written as "if X, then Y" | 여기서 판단이 갈리는 순간이 있나요? 어떤 기준으로 정하세요? |
-| 5 | Done check | What they check before calling it finished | 끝났다고 보기 전에 마지막으로 뭘 확인하세요? |
-| 6 | Past exceptions | Cases that broke the usual flow and what they did | 평소 순서대로 안 됐던 적이 있나요? 그때 어떻게 하셨어요? |
-| 7 | Tone and quality bar | Concrete markers of acceptable quality, ideally an approved example | 잘 됐다고 생각하는 결과물 하나를 보여 주실 수 있나요? |
-| 8 | What bad looks like | The mistakes they would catch at a glance | 받자마자 다시 하라고 할 결과물은 어떤 모습이에요? |
+| # | 주제 | 얻어야 할 것 | 예시 질문 |
+|---|------|-------------|-----------|
+| 1 | 계기와 빈도 | 시작할 때 실제로 칠 말, 얼마나 자주 하는지 | 이 일을 AI에게 시킬 때 실제로 뭐라고 입력하실 것 같으세요? (다음 메시지: 얼마나 자주 하세요?) |
+| 2 | 입력과 위치 | 모든 입력의 정확한 위치와 형식 | 이 일에 쓰는 자료는 각각 어디에 있나요? |
+| 3 | 실제 순서 | 공식 절차가 아니라 실제로 일하는 순서 | 지난번에 이 일을 했을 때 맨 처음 뭘 열어 보셨어요? |
+| 4 | 판단과 규칙 | 갈림길마다 "X면 Y" | 여기서 판단이 갈리는 순간이 있나요? |
+| 5 | 끝났다는 확인 | 끝났다고 하기 전에 확인하는 것 | 끝났다고 보기 전에 마지막으로 뭘 확인하세요? |
+| 6 | 지난 예외 | 평소 흐름이 깨진 경우와 그때 한 일 | 평소 순서대로 안 됐던 적이 있나요? |
+| 7 | 품질 기준 | 받아들일 품질의 구체적 표지, 가능하면 승인된 예시 | 잘 됐다고 생각하는 결과물 하나를 보여 주실 수 있나요? |
+| 8 | 나쁜 결과 | 보자마자 잡아낼 실수 | 받자마자 다시 하라고 할 결과물은 어떤 모습이에요? |
 
-Ask about the person boundary as part of topic 4: which decisions must stay with a person. Those become `Person:` lines in the steps.
+4번 주제에서 사람에게 남길 판단도 묻는다.
+그 판단은 단계에 `Person:` 줄로 들어간다.
 
-When a rule is set outside the team (law, platform policy, a client contract), ask where your partner checks it. Read the primary source yourself and cite it with its date in the rule file. The source wins over habit; when they differ, tell your partner which line conflicts.
+팀 밖에서 정한 규칙(법, 플랫폼 정책, 고객 계약)이면 사람이 어디서 그 규칙을 확인하는지 묻는다.
+원문은 직접 읽고, 규칙 파일에 출처와 날짜를 적는다.
+원문과 습관이 다르면 원문을 따르고, 어느 줄이 다른지 사람에게 알린다.
 
-For a checker job, topic 7's approved example is a past output with the problems your partner found in it, and topic 8 is a problem they once missed.
+검사형 일이면 7번의 승인된 예시는 사람이 문제를 찾아낸 지난 결과물이다.
+8번은 사람이 한때 놓친 문제다.
 
-## When your partner says they are done
+## 사람이 끝났다고 하면
 
-1. Check the eight topics. A missing topic → ask it now, still one at a time.
-2. Run the gate's third question again with what you learned: skill, agent, or knowledge file.
-3. Write the file from `skill-template.md` or `agent-template.md`.
-4. Show the whole file, not a summary.
-5. In the same message, list any extra work you think the job needs as proposals, and ask these two numbered questions. This is the one message with two questions:
+1. 8개 주제를 확인한다.
+   빠진 주제가 있으면 지금 묻는다.
+   여전히 하나씩 묻는다.
+2. 알게 된 것으로 관문 3번(스킬, 에이전트, 지식 파일)을 다시 판단한다.
+3. `skill-template.md`나 `agent-template.md`로 파일을 쓴다.
+4. 요약이 아니라 파일 전체를 보여 준다.
+5. 같은 메시지에 더 필요해 보이는 작업을 제안으로 적고, 번호 붙인 질문 두 개를 묻는다.
+   질문이 둘인 메시지는 이것 하나뿐이다.
    1. 제가 잘못 쓴 부분은 어디인가요?
    2. 말씀 안 하신 것 중에 빠진 게 있나요?
-6. Apply the answers, then move to the first run.
+6. 답을 반영하고 첫 실행으로 넘어간다.
 
-## If you cannot write files
+## 파일을 쓸 수 없으면
 
-Print the full file in the chat, give the exact path (`skills/<job>/SKILL.md`), and tell your partner to delete any older uploaded copy before adding the new one. Two copies bring retired instructions back.
+파일 전체를 채팅에 보여 주고, 정확한 경로(`skills/<job>/SKILL.md`)를 알린다.
+예전에 올린 사본이 있으면 지우고 새 파일을 올리라고 알린다.
+사본이 둘이면 폐기한 지시가 되살아난다.

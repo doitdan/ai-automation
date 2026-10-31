@@ -1,3 +1,3 @@
-# Meeting Notes Template
+# 회의록 양식
 
 TODO

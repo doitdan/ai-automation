@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PLUGIN_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-bootstrap=$(cat "${PLUGIN_ROOT}/skills/using-ai-automation/SKILL.md" 2>&1 || echo "Error reading using-ai-automation skill")
+bootstrap=$(cat "${PLUGIN_ROOT}/skills/using-ai-automation/SKILL.md" 2>&1 || echo "using-ai-automation 스킬을 읽지 못했다")
 
 escape_for_json() {
     local s="$1"
@@ -14,7 +14,7 @@ escape_for_json() {
     printf '%s' "$s"
 }
 
-context="<EXTREMELY_IMPORTANT>\nBelow is the full content of your 'ai-automation:using-ai-automation' skill. For all other skills, use the 'Skill' tool:\n\n$(escape_for_json "$bootstrap")\n</EXTREMELY_IMPORTANT>"
+context="<EXTREMELY_IMPORTANT>\n아래는 'ai-automation:using-ai-automation' 스킬 전문이다. 다른 스킬은 'Skill' 도구로 실행한다:\n\n$(escape_for_json "$bootstrap")\n</EXTREMELY_IMPORTANT>"
 
 if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
   printf '{\n  "additional_context": "%s"\n}\n' "$context"

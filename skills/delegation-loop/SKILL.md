@@ -1,74 +1,101 @@
 ---
 name: delegation-loop
-description: Use when a repeated job should be handed to AI as a new skill or agent, when an existing skill or agent produced a wrong result that must be fixed at its source, or when someone says "스킬 만들어줘", "에이전트 만들어줘", "이거 AI한테 맡기고 싶어", "자동화해줘", "위임 루프", "결과가 또 틀렸어", "매번 같은 걸 고쳐"
+description: 반복되는 일을 AI에게 새 스킬이나 에이전트로 맡기려 할 때, 기존 스킬이나 에이전트가 틀린 결과를 내서 원인 자리에서 고쳐야 할 때, 또는 "스킬 만들어줘", "에이전트 만들어줘", "이거 AI한테 맡기고 싶어", "자동화해줘", "위임 루프", "결과가 또 틀렸어", "매번 같은 걸 고쳐"라고 할 때
 ---
 
-# Delegation Loop
+# 위임 루프
 
-## Overview
+## 개요
 
-One job gets one playbook: a skill folder the AI reads and follows. A playbook has three layers.
+일 하나에 플레이북 하나를 둔다.
+플레이북은 AI가 읽고 따르는 스킬 폴더다.
+플레이북은 세 레이어로 이뤄진다.
 
-| Layer | What it holds | Where it lives in this repo |
-|-------|---------------|-----------------------------|
-| Process | Purpose, triggers, inputs, ordered steps, decision rules, definition of done, edge cases | `skills/<job>/SKILL.md` |
-| Toolbox | Templates, rule files, reference data, approved examples, scripts | `skills/<job>/references/`, `skills/<job>/scripts/` |
-| Proof | 5–10 checks that can fail, each with outside evidence | `## Done when` in `SKILL.md` |
+| 레이어 | 담는 것 | 이 저장소에서 두는 곳 |
+|----|---------|------------------------|
+| 프로세스 | 목적, 실행 조건, 입력, 순서 있는 단계, 판단 규칙, 완료 기준, 예외 상황 | `skills/<job>/SKILL.md` |
+| 툴박스 | 양식, 규칙 파일, 참고 데이터, 승인된 예시, 스크립트 | `skills/<job>/references/`, `skills/<job>/scripts/` |
+| 증명 | 실패할 수 있는 검사 5~10개, 각각 AI 밖의 근거를 붙인다 | `SKILL.md`의 `## 완료 조건` |
 
-When the result is wrong, fix the playbook, never only the output in chat. The next run must not need the same correction.
+결과가 틀리면 플레이북을 고친다.
+대화창의 결과물만 고치고 끝내지 않는다.
+다음 실행에서 같은 수정이 다시 필요하면 안 된다.
 
-Talk to your human partner in their language. Write the files in English, like the rest of this repo, except words people type to trigger the skill.
+사람과는 그 사람의 언어로 이야기한다.
+파일은 AGENTS.md "문서 작성 규칙"을 따라 쓴다.
+본문은 한국어로 쓰고, `name`과 파일명은 영문 소문자로 쓴다.
 
-## Where to Start
+## 어디서 시작하나
 
-| Situation | Start at |
-|-----------|----------|
-| A new job to hand over | Phase 0 |
-| An existing skill or agent gave a wrong result | Phase 4. No gate, no interview |
-| An existing skill should cover more | Phase 0, then interview only the topics the skill does not answer yet |
-| An existing skill has fewer than five checks | Phase 3 |
+| 상황 | 시작할 곳 |
+|------|-----------|
+| 새로 맡길 일이 있다 | 0단계 |
+| 기존 스킬이나 에이전트가 틀린 결과를 냈다 | 4단계. 관문도 인터뷰도 하지 않는다 |
+| 기존 스킬이 더 많은 일을 맡아야 한다 | 0단계. 그다음 스킬이 아직 답하지 못하는 주제만 인터뷰한다 |
+| 기존 스킬의 검사가 다섯 개보다 적다 | 3단계 |
 
-## The Loop
+## 루프
 
-Each phase ends with something your partner can see.
+단계마다 사람이 볼 수 있는 결과를 남긴다.
 
-0. **Gate.** Read `references/gate.md`. Confirm the job qualifies, search for an existing skill, agent, or knowledge file that already covers it, and choose skill, agent, or knowledge file. Report the choice in two lines; the first interview question may follow in the same message.
-1. **Interview.** Read `references/interview.md`. One question per message, at least eight, no file until your partner says they are done. Then write `SKILL.md` from `references/skill-template.md` (or the agent from `references/agent-template.md`), show the whole file, and ask what you got wrong and what they did not tell you.
-2. **First run, then toolbox.** Run the job once on real past input. When your partner approves a result, follow `references/toolbox.md`: save what was approved, rerun from scratch, report which saved files were used and what was rebuilt.
-3. **Proof.** Follow `references/proof.md`: write the checks into `## Done when`, run every check, fix, rerun, report one line per check with its evidence.
-4. **Fix loop.** Every wrong result, now or months later, goes through `references/fix-loop.md`: diagnose the layer in two sentences, make the smallest durable fix, add a line to `notes.md`, rerun from scratch, show before and after.
-5. **Ship.** New skill: add the routing row in `skills/using-ai-automation/SKILL.md`. Every change: a line in `CHANGELOG.md` and `python3 scripts/validate.py`. Run the changed skill once in a real Codex session (AGENTS.md "Before a PR"); outside Codex, say that transcript is still owed. Commit only when your partner asks.
+0. **관문.** `references/gate.md`를 읽는다.
+   이 일이 조건을 갖췄는지 확인하고, 이미 다루는 스킬·에이전트·지식 파일이 있는지 찾고, 스킬·에이전트·지식 파일 중 무엇을 만들지 고른다.
+   고른 결과를 두 줄로 알린다.
+   같은 메시지에 첫 인터뷰 질문을 붙여도 된다.
+1. **인터뷰.** `references/interview.md`를 읽는다.
+   메시지 하나에 질문 하나씩, 최소 여덟 개를 묻는다.
+   사람이 끝났다고 할 때까지 파일을 만들지 않는다.
+   그다음 `references/skill-template.md`로 `SKILL.md`를 쓰고(에이전트라면 `references/agent-template.md`로 쓴다), 파일 전체를 보여 주고, 무엇을 잘못 썼는지와 무엇을 말하지 않았는지 묻는다.
+2. **첫 실행, 그다음 툴박스.** 실제 과거 입력으로 일을 한 번 돌린다.
+   사람이 결과를 승인하면 `references/toolbox.md`를 따른다.
+   승인된 것을 저장하고, 처음부터 다시 돌리고, 저장한 파일 중 무엇을 썼는지와 무엇을 새로 만들었는지 알린다.
+3. **증명.** `references/proof.md`를 따른다.
+   검사를 `## 완료 조건`에 쓰고, 모든 검사를 돌리고, 고치고, 다시 돌린다.
+   검사마다 한 줄씩 근거와 함께 알린다.
+4. **수정 루프.** 지금이든 몇 달 뒤든 틀린 결과는 모두 `references/fix-loop.md`를 거친다.
+   실패한 레이어를 두 문장으로 진단하고, 오래가는 가장 작은 수정을 하고, `notes.md`에 한 줄을 더하고, 처음부터 다시 돌리고, 수정 전과 후를 보여 준다.
+5. **배포.** 새 스킬이면 `skills/using-ai-automation/SKILL.md`에 라우팅 행을 더한다.
+   무엇을 바꾸든 `CHANGELOG.md`에 한 줄을 쓰고 `python3 scripts/validate.py`를 돌린다.
+   바꾼 스킬을 실제 Codex 세션에서 한 번 돌린다(AGENTS.md "PR 전에"). Codex 밖이라면 그 대화 기록이 아직 남았다고 말한다.
+   커밋은 사람이 요청할 때만 한다.
 
-`references/examples.md` walks one job through every phase.
+`references/examples.md`는 일 하나를 모든 단계에 걸쳐 따라간다.
 
-## Hard Rules
+## 꼭 지킬 규칙
 
-- During the interview, one question per message, and one thing per question: no "and".
-- No file before your partner says the interview is over.
-- Extra work you think the job needs is listed as a proposal when you show the file. Build it only after a yes.
-- Sending, publishing, paying, or deleting outside the repo is a `Person:` step unless `knowledge/rules/approval.md` says otherwise.
-- Client names, recipients, account data, and real results never go into this repo. Examples use made-up names and numbers.
-- Rules set outside the team (law, platform policy, a client contract) come from the primary source, cited with its date in the rule file.
-- A fix lands in a playbook file and in `notes.md`. A fix only in chat is not a fix.
-- "Looks good" is not evidence. Every check names its evidence or says why it could not be checked.
-- More than two checks fail on the first pass → stop patching the output and name the process step that caused it.
-- The same mistake twice → an explicit rule that blocks it, not a reminder.
-- After any fix, rerun the whole job from scratch.
-- Cannot write a file → never pretend you did. Print the full content, the exact path, and tell your partner to replace the old copy.
+- 인터뷰 중에는 메시지 하나에 질문 하나, 질문 하나에 한 가지만 묻는다.
+  "그리고"로 묶지 않는다.
+- 사람이 인터뷰가 끝났다고 하기 전에는 파일을 만들지 않는다.
+- 이 일에 더 필요하다고 생각하는 작업은 파일을 보여 줄 때 제안으로 나열한다.
+  승낙을 받은 뒤에만 만든다.
+- 저장소 밖으로 보내기, 게시하기, 결제하기, 지우기는 `Person:` 단계다.
+  `knowledge/rules/approval.md`가 달리 정하면 그것을 따른다.
+- 고객사 이름, 수신자, 계정 데이터, 실제 결과는 이 저장소에 절대 넣지 않는다.
+  예시에는 지어낸 이름과 숫자를 쓴다.
+- 팀 밖에서 정한 규칙(법, 플랫폼 정책, 고객 계약)은 원출처에서 가져와 규칙 파일에 날짜와 함께 인용한다.
+- 수정은 플레이북 파일과 `notes.md`에 남긴다.
+  대화에만 있는 수정은 수정이 아니다.
+- "괜찮아 보인다"는 근거가 아니다.
+  검사마다 근거를 대거나 왜 확인하지 못했는지 말한다.
+- 첫 회차에 검사가 두 개 넘게 실패하면 결과물 땜질을 멈추고 원인이 된 프로세스 단계를 짚는다.
+- 같은 실수가 두 번 나오면 당부가 아니라 그 실수를 막는 명시적 규칙을 만든다.
+- 무엇을 고쳤든 고친 뒤에는 일 전체를 처음부터 다시 돌린다.
+- 파일을 쓸 수 없으면 쓴 척하지 않는다.
+  내용 전체와 정확한 경로를 출력하고, 사람에게 옛 사본을 바꾸라고 말한다.
 
-## Red Flags
+## 위험 신호
 
-| You catch yourself | Do this instead |
-|--------------------|-----------------|
-| Sending a numbered list of questions | Send the first question only |
-| "I have enough to draft it" before your partner says done | Ask the next uncovered interview topic |
-| Correcting the output and moving on | Diagnose the layer, edit the playbook, log it |
-| Writing "clear", "professional", "accurate" as a check | Rewrite it as something a file, count, link, or test can fail |
-| Creating `report-v2.md` next to `report.md` | Replace the file; one file per purpose |
-| Building a separate agent for a job a skill can do | Write the skill; an agent only for the reasons in `references/gate.md` |
-| Copying a shared rule into a skill | Move it to `knowledge/` and point to it |
-| Reusing a rule from `references/examples.md` | Take rules only from your partner or the primary source |
+| 이런 자신을 발견하면 | 대신 이렇게 한다 |
+|----------------------|------------------|
+| 번호 매긴 질문 목록을 보내고 있다 | 첫 질문만 보낸다 |
+| 사람이 끝났다고 하기 전에 "초안 쓸 만큼 들었다"고 생각한다 | 아직 다루지 않은 다음 인터뷰 주제를 묻는다 |
+| 결과물을 고치고 그냥 넘어간다 | 레이어를 진단하고, 플레이북을 고치고, 기록한다 |
+| "명확함", "전문적", "정확함"을 검사로 쓴다 | 파일, 개수, 링크, 테스트로 실패할 수 있는 문장으로 다시 쓴다 |
+| `report.md` 옆에 `report-v2.md`를 만든다 | 파일을 교체한다. 목적 하나에 파일 하나다 |
+| 스킬로 할 수 있는 일에 별도 에이전트를 만든다 | 스킬을 쓴다. 에이전트는 `references/gate.md`에 적힌 이유가 있을 때만 만든다 |
+| 공유 규칙을 스킬에 복사한다 | `knowledge/`로 옮기고 그곳을 가리킨다 |
+| `references/examples.md`의 규칙을 가져다 쓴다 | 규칙은 사람이나 원출처에서만 가져온다 |
 
-## Source
+## 출처
 
-Adapted from the AI delegation loop playbook (https://sdk-kim-builds.com/guides/ai-delegation-loop-playbook/) and mapped onto this repository's layout.
+AI 위임 루프 플레이북(https://sdk-kim-builds.com/guides/ai-delegation-loop-playbook/)을 이 저장소 구조에 맞게 옮겼다.

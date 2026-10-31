@@ -1,36 +1,42 @@
-# Worked Example: weekly client update
+# 예시: 주간 고객 메일
 
-One job through every phase. Every name, number, and rule here is made up to show the shape. Never copy a rule from this file into a real skill; rules come only from your partner or a primary source.
+업무 하나가 모든 단계를 거치는 모습이다.
+여기 나오는 이름, 숫자, 규칙은 모양을 보이려고 지어낸 것이다.
+이 파일의 규칙을 실제 스킬에 옮기지 않는다.
+규칙은 사람이나 원문에서만 가져온다.
 
-## Phase 0 — Gate
+## 0. 관문
 
-Partner: "매주 월요일마다 고객사별 주간 광고 성과 메일 써. 이거 AI한테 맡기고 싶어."
+사람: "매주 월요일마다 고객사별 주간 광고 성과 메일 써. 이거 AI한테 맡기고 싶어."
 
-- Repeats weekly, a wrong number is visible at a glance, explainable in 20 minutes → qualifies.
-- No skill, agent, or knowledge file covers it.
-- Skill, because a person starts it and the AI follows steps. Name: `weekly-client-update`.
+- 매주 반복되고, 숫자가 틀리면 바로 보이고, 20분 안에 설명할 수 있다. 맡길 만하다.
+- 이 일을 다루는 스킬, 에이전트, 지식 파일이 없다.
+- 사람이 시작하고 AI가 단계를 따르는 일이라 스킬이다. 이름은 `weekly-client-update`다.
 
-Report: "주간 고객 메일은 위임 조건(매주 반복, 틀리면 바로 보임, 20분 안에 설명 가능)을 모두 충족합니다. 기존 스킬이 없어서 `weekly-client-update` 스킬로 새로 만들겠습니다."
+알림: "주간 고객 메일은 위임 조건(매주 반복, 틀리면 바로 보임, 20분 안에 설명 가능)을 모두 충족합니다. 기존 스킬이 없어서 `weekly-client-update` 스킬로 새로 만들겠습니다."
 
-## Phase 1 — Interview (one question per message)
+## 1. 인터뷰 (메시지 하나에 질문 하나)
 
 1. 이 일을 AI에게 시킬 때 실제로 뭐라고 입력하실 것 같으세요?
-2. 숫자는 어디서 가져오세요? 파일 형식은요?
-3. 지난주에 이 메일 쓸 때 맨 처음 뭘 여셨어요?
-4. 그다음엔 뭘 하셨어요? (repeated until the order is complete)
-5. 메일 첫 문장은 어떻게 정하세요?
-6. 보내기 전에 마지막으로 뭘 확인하세요?
-7. 평소처럼 안 됐던 주가 있었나요?
-8. 고객이 좋게 답장한 메일 하나 보여 주실 수 있나요?
-9. 받자마자 다시 쓰라고 할 메일은 어떤 모습이에요?
+2. 얼마나 자주 하세요?
+3. 숫자는 어디서 가져오세요?
+4. 지난주에 이 메일 쓸 때 맨 처음 뭘 여셨어요?
+5. 그다음엔 뭘 하셨어요? (순서가 다 나올 때까지 되풀이)
+6. 메일 첫 문장은 어떻게 정하세요?
+7. 보내기 전에 마지막으로 뭘 확인하세요?
+8. 평소처럼 안 됐던 주가 있었나요?
+9. 고객이 좋게 답장한 메일 하나 보여 주실 수 있나요?
+10. 받자마자 다시 쓰라고 할 메일은 어떤 모습이에요?
 
-The detail no SOP had came from question 5: open with the metric that moved most since last week. It became a decision rule.
+어느 절차서에도 없던 세부는 6번에서 나왔다.
+지난주보다 가장 크게 움직인 지표로 시작한다는 것이다.
+이것이 결정 규칙이 됐다.
 
-Partner: "이 정도면 됐어." → write `SKILL.md`, show it whole, ask what is wrong and what is missing.
+사람: "이 정도면 됐어." → `SKILL.md`를 쓰고, 전체를 보여 주고, 잘못 쓴 곳과 빠진 것을 묻는다.
 
-## Phase 2 — First run, toolbox
+## 2. 첫 실행과 툴박스
 
-The first approved email produces three saved files and an example:
+처음 승인된 메일로 파일 셋과 예시 하나를 저장한다.
 
 ```
 skills/weekly-client-update/
@@ -46,35 +52,35 @@ skills/weekly-client-update/
     test_numbers_pull.py
 ```
 
-Second run report: "Used `numbers-pull.py`, `client-update-template.md`. Rebuilt from nothing: the week-over-week table → save next: `wow-table.py`."
+두 번째 실행 보고: "`numbers-pull.py`, `client-update-template.md`를 썼습니다. 처음부터 다시 만든 것: 전주 대비 표 → 다음에 저장: `wow-table.py`."
 
-## Phase 3 — Proof
+## 3. 증명
 
 ```markdown
-## Done when
+## 완료 조건
 
-- [ ] Every number appears in `numbers-pull.py` output for this week
-- [ ] The first sentence names the metric with the largest week-over-week change
-- [ ] Body is 200 words or fewer
-- [ ] Client name matches the team's client sheet exactly
-- [ ] Every promise in last week's sent email is mentioned
-- [ ] No adjective from the banned list in `references/RULE.md`
+- [ ] 모든 숫자가 이번 주 `numbers-pull.py` 출력에 있다
+- [ ] 첫 문장이 전주 대비 가장 크게 바뀐 지표를 말한다
+- [ ] 본문이 200단어 이하다
+- [ ] 고객사 이름이 팀의 고객 시트와 정확히 같다
+- [ ] 지난주 보낸 메일의 약속을 모두 언급한다
+- [ ] `references/RULE.md` 금지 형용사가 없다
 ```
 
-## Phase 4 — Fix loop (week 4)
+## 4. 수정 루프 (4주차)
 
-Partner: "CTR 3.2%라고 써 있는데 파일에 그런 숫자가 없어. 지난주에도 그랬어."
+사람: "CTR 3.2%라고 써 있는데 파일에 그런 숫자가 없어. 지난주에도 그랬어."
 
-Diagnosis to partner: "숫자를 어디서만 가져오라는 규칙이 없어 프로세스가 실패했고, 그 숫자를 잡을 검사가 없어 증명도 실패했습니다. 같은 실수가 두 번이라 권고가 아니라 실패하는 검사로 막겠습니다."
+사람에게 알린 진단: "숫자를 어디서만 가져오라는 규칙이 없어 프로세스가 실패했고, 그 숫자를 잡을 검사가 없어 증명도 실패했습니다. 같은 실수가 두 번이라 당부가 아니라 실패하는 검사로 막겠습니다."
 
-Fix:
+수정:
 
-- Process: step 3 now says "Use only numbers in `numbers-pull.py` output. A metric that is not there is left out and named at hand-over."
-- Proof: `scripts/check-numbers.py` added, and the first `## Done when` line now says to run it.
-- `notes.md`: `- 2026-09-29 | process, proof | CTR 3.2% not in the export, second time | numbers only from numbers-pull.py; check-numbers.py added to Done when`
-- Rerun with the same week's export: before shows `3.2%`, after leaves CTR out and the proof report shows `PASS numbers traced: check-numbers.py printed ok`.
+- 프로세스: 3단계에 "`numbers-pull.py` 출력에 있는 숫자만 쓴다. 없는 지표는 빼고 넘길 때 알린다"를 넣었다.
+- 증명: `scripts/check-numbers.py`를 더하고, 완료 조건 첫 줄에 그것을 돌리라고 적었다.
+- `notes.md`: `- 2026-09-29 | 프로세스, 증명 | CTR 3.2%가 내보내기 파일에 없음, 두 번째 | 숫자는 numbers-pull.py 출력에서만, 완료 조건에 check-numbers.py 추가`
+- 같은 주 파일로 다시 돌렸다. 수정 전에는 `3.2%`가 있었고, 수정 후에는 CTR을 빼고 증명 보고에 `PASS 숫자 추적: check-numbers.py가 ok 출력`이 나왔다.
 
-## Phase 5 — Ship
+## 5. 마무리
 
-- Routing row: `| "주간 광고 성과 메일", "월요일 고객사 리포트" | weekly-client-update |`
-- `CHANGELOG.md` line, `python3 scripts/validate.py` → `ok`, one real Codex session transcript for the PR.
+- 요청 → 스킬 표 줄: `| "주간 광고 성과 메일", "월요일 고객사 리포트" | weekly-client-update |`
+- `CHANGELOG.md` 줄, `python3 scripts/validate.py` → `ok`, PR에 붙일 실제 Codex 세션 기록 하나

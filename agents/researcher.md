@@ -1,6 +1,6 @@
 ---
 name: researcher
-description: Use when investigating a question across code, documents, or the web before any change
+description: 무언가를 바꾸기 전에 코드·문서·웹을 조사해 질문에 답해야 할 때 쓴다
 model: inherit
 ---
 

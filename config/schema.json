@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ai-automation user config",
+  "title": "ai-automation 사용자 설정",
   "type": "object",
   "required": ["repositories"],
   "additionalProperties": false,
   "properties": {
     "repositories": {
       "type": "object",
-      "description": "Repository name from knowledge/repositories.md → absolute local path",
+      "description": "knowledge/repositories.md의 저장소 이름 → 로컬 절대 경로",
       "additionalProperties": { "type": "string" }
     }
   }

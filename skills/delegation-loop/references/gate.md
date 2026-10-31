@@ -1,59 +1,75 @@
-# Gate
+# 관문
 
-Answer these before the interview. Report the result to your partner in two lines: what you will build and why. The first interview question may follow in the same message.
+인터뷰 전에 아래에 답한다.
+결과는 두 줄로 알린다. 무엇을 만들지, 왜 그런지다.
+같은 메시지에 첫 인터뷰 질문을 붙여도 된다.
 
-## 1. Does the job qualify?
+## 1. 맡길 만한 일인가
 
-All four must be yes.
+네 가지가 모두 "예"여야 한다.
 
-| Test | Yes means |
+| 기준 | "예"의 뜻 |
 |------|-----------|
-| Repeats | It happens at least once a week, or on a fixed trigger that comes back |
-| Bad output is visible | Your partner can tell a bad result at a glance |
-| Explainable | A new hire could learn it in about 20 minutes |
-| Real input exists | You can get at least one real past input, or your partner can produce one |
+| 반복된다 | 주 1회 이상, 또는 다시 돌아오는 정해진 계기가 있다 |
+| 나쁜 결과가 보인다 | 사람이 결과를 보자마자 잘못을 알아본다 |
+| 설명할 수 있다 | 새로 온 사람에게 20분 안에 가르칠 수 있다 |
+| 실제 입력이 있다 | 지난 입력을 하나 이상 받을 수 있거나, 사람이 만들어 줄 수 있다 |
 
-A test the request does not answer → ask it as one of the first interview questions and call the gate report provisional.
+요청만으로 답할 수 없는 기준은 첫 인터뷰 질문으로 묻는다.
+그때 관문 결과는 잠정이라고 밝힌다.
 
-Any no → say which one and suggest the most repeated piece of the job instead. Start with the most repeated job, not the most complex one.
+하나라도 "아니요"면 어느 기준인지 말한다.
+그리고 그 일에서 가장 자주 반복되는 부분을 대신 제안한다.
+가장 복잡한 일이 아니라 가장 자주 하는 일부터 맡긴다.
 
-A checker job (find what is wrong in someone's output) fails "bad output is visible" by nature: a miss is invisible. It qualifies only if you can build a set of known-bad and known-clean inputs for its proof (`proof.md`).
+검사형 일(남의 결과에서 잘못을 찾는 일)은 본래 "나쁜 결과가 보인다"를 통과하지 못한다.
+놓친 것은 보이지 않기 때문이다.
+위반이 든 입력과 깨끗한 입력을 만들어 증명할 수 있을 때만 맡긴다(`proof.md`).
 
-A decision that cannot be written as a rule stays with a person. Record it in the steps as `Person: <decision>` and keep it out of the delegated scope.
+규칙으로 적을 수 없는 판단은 사람에게 남긴다.
+단계에 `Person: <판단>`으로 적고, 맡기는 범위에서 뺀다.
 
-## 2. Does it already exist?
+## 2. 이미 있는가
 
-Search before you build:
+만들기 전에 찾는다.
 
-- `skills/*/SKILL.md` descriptions and step lists
-- `agents/*.md` descriptions and bodies
+- `skills/*/SKILL.md`의 description과 단계
+- `agents/*.md`의 description과 본문
 - `knowledge/INDEX.md`
 
-| Found | Do |
-|-------|----|
-| A skill that does this job | Run the fix loop on that skill instead of creating a new one |
-| A skill that does part of it | Extend that skill, or split the shared part into `knowledge/` |
-| A generic agent whose body is still a stub | Fill it only if the job is the generic role its description names; otherwise build a job-specific agent and leave the stub alone |
-| An agent that already does this role | Point the calling skill at it and put the job's rules in the skill's `references/` |
-| A file with a similar name that does something else | Choose a name that cannot be confused with it |
-| Nothing | Continue |
+| 찾은 것 | 할 일 |
+|---------|-------|
+| 이 일을 하는 스킬 | 새로 만들지 않고 그 스킬에 수정 루프를 돌린다 |
+| 이 일의 일부를 하는 스킬 | 그 스킬을 넓히거나, 겹치는 부분을 `knowledge/`로 뺀다 |
+| 본문이 비어 있는 범용 에이전트 | 일이 그 description이 말하는 범용 역할일 때만 채운다. 아니면 이 일 전용 에이전트를 만들고 빈 틀은 그대로 둔다 |
+| 이미 이 역할을 하는 에이전트 | 부르는 스킬이 그 에이전트를 가리키게 하고, 이 일의 규칙은 스킬의 `references/`에 둔다 |
+| 이름은 비슷한데 다른 일을 하는 파일 | 헷갈리지 않는 이름을 고른다 |
+| 없음 | 계속한다 |
 
-## 3. Skill, agent, or knowledge file?
+## 3. 스킬, 에이전트, 지식 파일 중 무엇인가
 
-Default to a skill. One general AI with one playbook per job beats a chain of specialist agents.
+기본은 스킬이다.
+범용 AI 하나에 일마다 플레이북 하나를 주는 쪽이 전문 에이전트를 줄줄이 잇는 쪽보다 낫다.
 
-| Build | When |
-|-------|------|
-| Skill `skills/<job>/` | A person starts the job and the AI follows steps. This is almost always the answer |
-| Agent `agents/<name>.md` | A step must run in a fresh context: an independent reviewer who did not write the output, the same work fanned out over many items in parallel, or a long search whose raw material would flood the main conversation |
-| Knowledge file `knowledge/...` | It is a rule, list, or template that two or more skills need, not a procedure |
+| 만들 것 | 언제 |
+|---------|------|
+| 스킬 `skills/<job>/` | 사람이 일을 시작하고 AI가 단계를 따른다. 거의 언제나 이것이다 |
+| 에이전트 `agents/<name>.md` | 한 단계를 새 맥락에서 돌려야 한다. 결과를 쓰지 않은 독립 검토자, 여러 항목에 같은 일을 나눠 맡기기, 본 대화를 원자료로 채울 긴 조사가 그렇다 |
+| 지식 파일 `knowledge/...` | 절차가 아니라 두 스킬 이상이 쓰는 규칙, 목록, 양식이다 |
 
-An agent never stands alone. A skill step dispatches it, so building an agent also means editing the calling skill's step (see `agent-template.md`). When the work it checks is produced outside this repo, build a thin calling skill whose trigger is the request to check ("이 글 검사해줘") and whose step dispatches the agent. When a skill in this repo produces that work, add the dispatch step to that skill instead.
+에이전트는 혼자 서지 않는다.
+스킬의 한 단계가 에이전트를 부른다.
+그래서 에이전트를 만들면 부르는 스킬의 단계도 고친다(`agent-template.md`).
 
-Your partner asked for an "agent" and you build a skill plus an agent → say so in the gate report in one line: the skill is what they call, the agent is the fresh-context checker it runs.
+검사할 결과가 이 저장소 밖에서 나오면 얇은 호출 스킬을 만든다.
+그 스킬의 실행 조건은 검사 요청("이 글 검사해줘")이고, 단계에서 에이전트를 부른다.
+이 저장소의 스킬이 그 결과를 만든다면 그 스킬에 부르는 단계를 더한다.
 
-## 4. Name
+사람이 "에이전트"를 요청했는데 스킬과 에이전트를 함께 만들면 관문 결과에서 한 줄로 설명한다.
+사람이 부르는 것은 스킬이고, 에이전트는 스킬이 새 맥락에서 돌리는 검사자다.
 
-- Lowercase letters, digits, hyphens. The folder name and the `name:` field match.
-- Name the job, not the tool: `weekly-client-update`, not `gmail-helper`.
-- One job per folder. Two jobs that share steps get two folders and a shared `knowledge/` file.
+## 4. 이름
+
+- 영문 소문자, 숫자, 하이픈만 쓴다. 폴더 이름과 `name`이 같다.
+- 도구가 아니라 일에 이름을 붙인다. `gmail-helper`가 아니라 `weekly-client-update`다.
+- 폴더 하나에 일 하나다. 단계를 나누는 두 일은 폴더 둘과 `knowledge/` 공유 파일 하나로 만든다.
