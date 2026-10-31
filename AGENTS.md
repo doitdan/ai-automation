@@ -13,10 +13,13 @@ Claude Code·Cursor·Gemini CLI는 어댑터를 거쳐 같은 `skills/`·`knowle
 
 - 직접 고치는 매니페스트는 `.codex-plugin/plugin.json` 하나다. 고친 뒤 `scripts/render-manifests.py`를 돌리고 생성된 파일까지 커밋한다.
 - 스킬은 `skills/<name>/SKILL.md`에서만 찾는다. 하위 폴더로 묶지 않는다.
-- 한 스킬만 쓰는 규칙·양식·예시는 `skills/<name>/references/`에 둔다. 두 스킬 이상이 함께 쓰면 `knowledge/`로 옮긴다.
+- 사실과 자료(조사 결과, 참고 데이터, 외부 규칙 원문, 목록, 용어)는 쓰는 스킬이 하나여도 `knowledge/`에 주제별로 둔다. 추가·갱신 규칙은 `knowledge/INDEX.md`에 있다.
+- `skills/<name>/references/`에는 그 업무를 하는 방식만 둔다: 양식, 승인된 예시, 업무 전용 판단 규칙, 하위 프롬프트.
+- 두 스킬 이상이 쓰는 양식과 팀 규칙은 `knowledge/templates/`, `knowledge/rules/`에 둔다.
 - 요청 → 스킬 표는 `skills/using-ai-automation/SKILL.md`에만 둔다. 요청 → 저장소 표는 `knowledge/routing.md`에만 둔다.
 - 에이전트는 `agents/<name>.md`에만 둔다. `adapters/`에 복사하지 않는다.
 - 사용자마다 다른 값(로컬 경로 등)은 `~/.config/ai-automation/config.json`에 둔다. 이 저장소에 넣지 않는다.
+- 설치된 플러그인은 각 하네스의 캐시 폴더에서 돈다. 스킬·지식·에이전트를 고칠 때는 캐시가 아니라 설정의 `pluginRepository`(이 저장소의 로컬 clone)에 쓴다.
 
 ## 문서 작성 규칙
 

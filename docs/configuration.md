@@ -7,4 +7,5 @@
 
 - 형식: `config/schema.json`
 - 예시: `config/example.json`
+- `pluginRepository`: ai-automation 저장소 로컬 clone의 절대 경로. AI가 스킬·지식·에이전트를 고칠 때 여기에 쓴다
 - `repositories`: `knowledge/repositories.md`의 저장소 이름 → 로컬 절대 경로

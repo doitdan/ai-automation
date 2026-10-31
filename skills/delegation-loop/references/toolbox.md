@@ -8,7 +8,7 @@
 그 전에는 저장하지 않는다.
 
 예외는 하나다.
-원문(법, 플랫폼 정책)에서 가져온 규칙 파일은 첫 실행 전에 쓴다.
+원문(법, 플랫폼 정책)에서 가져온 사실은 첫 실행 전에 `knowledge/` 주제 파일로 쓴다.
 첫 실행에 그 파일이 필요하기 때문이다.
 
 ## 무엇을 저장하나
@@ -17,9 +17,10 @@
 |------|----|------|
 | 기계적 단계의 스크립트 | 내보내기 파일에서 숫자 뽑기 | `scripts/<동사-명사>.py`와 작은 테스트 |
 | 자리표시자 양식 | 메일 뼈대 | `references/<name>-template.md` |
-| 참조 자료 | 가격표, 링크 목록, 상품명 | `references/<name>.md`, 다른 스킬도 쓰면 `knowledge/` |
+| 사실·참고 자료 | 가격표, 링크 목록, 상품명, 조사 결과 | `knowledge/domains/<topic>.md`. 쓰는 스킬이 하나여도 여기 둔다 |
+| 외부 규칙 원문 | 법, 플랫폼 정책, 계약 조건 | `knowledge/domains/<topic>.md`, 출처와 날짜를 붙인다 |
 | 승인된 예시 | 사람이 그대로 보낸 결과물 | `references/examples/<YYYY-MM-DD>-<label>.md` |
-| 규칙 파일 | 말투, 형식, 금지어 | `references/RULE.md`, 함께 쓰면 `knowledge/rules/` |
+| 업무 규칙 | 이 일의 말투, 형식, 금지어 | `references/RULE.md`, 함께 쓰면 `knowledge/rules/` |
 | 반복 하위 프롬프트 | 한 단계 안에서 다시 쓰는 프롬프트 | `references/<name>-prompt.md` |
 
 ## 저장하지 않는 것
@@ -39,7 +40,7 @@
 3. 그 파일을 쓰는 `SKILL.md` 단계를 고친다. 파일 이름, 쓸 때, 쓰지 않을 때를 적는다.
 4. 저장한 파일마다 `references/INDEX.md`에 한 줄을 더한다. 스크립트도 적는다(`../scripts/numbers-pull.py`). 색인이 없으면 만든다.
 5. 스크립트 옆에는 작은 테스트(`scripts/test_<name>.py`)를 둔다. 스킬 폴더에서 `python3 -m unittest discover -s scripts -p 'test_*.py'`로 돌린다.
-6. 두 스킬 이상이 쓰는 파일은 `knowledge/`에 두고 `knowledge/INDEX.md`에 한 줄을 더한다. 복사하지 않고 경로를 가리킨다.
+6. 사실·자료는 `knowledge/INDEX.md`의 "추가·갱신 규칙"대로 저장하고, 스킬의 `## 참고 지식`에 경로를 적는다. 복사하지 않고 경로를 가리킨다.
 
 `references/INDEX.md`:
 

@@ -5,6 +5,10 @@
   "required": ["repositories"],
   "additionalProperties": false,
   "properties": {
+    "pluginRepository": {
+      "type": "string",
+      "description": "ai-automation 저장소 로컬 clone의 절대 경로. 스킬·지식·에이전트를 고칠 때 여기에 쓴다"
+    },
     "repositories": {
       "type": "object",
       "description": "knowledge/repositories.md의 저장소 이름 → 로컬 절대 경로",

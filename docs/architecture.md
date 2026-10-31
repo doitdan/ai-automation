@@ -30,5 +30,6 @@ scripts/                    render-manifests.py, bump-version.sh, validate.py
 ## 무엇이 무엇을 읽나
 
 - `using-ai-automation` → `knowledge/INDEX.md`, `knowledge/routing.md`, `adapters/<harness>/README.md`
-- 업무 스킬 → 자기 `references/`, 그다음 `INDEX.md`가 가리키는 `knowledge/` 파일
+- 업무 스킬 → 자기 `references/`(업무 방식), 그다음 `INDEX.md`가 가리키는 `knowledge/` 파일(사실·자료)
+- 작업 중 찾은 사실·자료 → `knowledge/` 주제 파일에 저장·갱신. 쓰는 곳은 캐시가 아니라 `pluginRepository`
 - 업무 스킬 → 서브에이전트가 필요하면 `agents/<name>.md`

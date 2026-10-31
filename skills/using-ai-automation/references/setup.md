@@ -30,6 +30,7 @@ OpenAI의 GitHub 플러그인이 설치돼 있고 GitHub 계정과 연결돼 있
 3. `TODO`로 표시된 값을 사람에게 물어 채운다. 로컬 경로를 추측하지 않는다.
 4. 파일이 `config/schema.json` 형식에 맞는지 확인한다.
 5. `repositories`에 적은 경로가 모두 실제로 있는지 확인한다.
+6. ai-automation 저장소의 로컬 clone 경로를 사람에게 묻는다. 없으면 승인을 받아 `gh repo clone doitdan/ai-automation <경로>`로 받는다. 그 경로를 `pluginRepository`에 적는다.
 
 ## 4. 보고
 

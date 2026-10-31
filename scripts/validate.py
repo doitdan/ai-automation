@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 HOOK_SCRIPTS = ["hooks/session-start", "hooks/run-hook.cmd"]
+CHECKED_DATE = re.compile(r"^확인한 날: \d{4}-\d{2}-\d{2}$", re.M)
 USER_FACING_PATHS = ["skills", "knowledge", "agents", "hooks", "adapters", "config", "GEMINI.md"]
 
 
@@ -107,6 +108,21 @@ def changelog_errors():
     return [f"CHANGELOG.md: missing '{heading.strip()} — <date>' heading"]
 
 
+def knowledge_errors():
+    knowledge = ROOT / "knowledge"
+    index = (knowledge / "INDEX.md").read_text()
+    errors = []
+    for path in sorted(knowledge.rglob("*.md")):
+        relative = path.relative_to(knowledge).as_posix()
+        if relative == "INDEX.md":
+            continue
+        if f"`{relative}`" not in index:
+            errors.append(f"knowledge/{relative}: not listed in knowledge/INDEX.md")
+        if relative.startswith("domains/") and not CHECKED_DATE.search(path.read_text()):
+            errors.append(f"knowledge/{relative}: missing '확인한 날: YYYY-MM-DD' line")
+    return errors
+
+
 def render_errors():
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts/render-manifests.py"), "--check"],
@@ -123,6 +139,7 @@ def main():
         + agent_errors()
         + manifest_path_errors()
         + hook_errors()
+        + knowledge_errors()
         + render_errors()
         + version_bump_errors()
         + changelog_errors()

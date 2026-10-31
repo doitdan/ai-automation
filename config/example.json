@@ -1,4 +1,5 @@
 {
+  "pluginRepository": "/absolute/path/to/ai-automation",
   "repositories": {
     "TODO-repository-name": "/absolute/path/to/TODO-repository"
   }
