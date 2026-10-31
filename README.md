@@ -6,7 +6,26 @@ Codex를 기준으로 Claude Code, Cursor, Gemini CLI에서 같은 스킬·지�
 
 ## 설치
 
-[docs/installation.md](docs/installation.md)
+Codex
+
+```bash
+codex plugin marketplace add https://github.com/doitdan/ai-automation.git
+codex plugin add ai-automation@ai-automation
+```
+
+Claude Code
+
+```
+/plugin install ai-automation --marketplace doitdan/ai-automation
+```
+
+Gemini CLI
+
+```bash
+gemini extensions install https://github.com/doitdan/ai-automation
+```
+
+자세한 내용은 [docs/installation.md](docs/installation.md).
 
 ## 사용 예시
 

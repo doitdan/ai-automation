@@ -3,21 +3,21 @@
 Codex
 
 ```bash
-codex plugin marketplace add <git-url>
+codex plugin marketplace add https://github.com/doitdan/ai-automation.git
 codex plugin add ai-automation@ai-automation
 ```
 
 Claude Code
 
 ```
-/plugin marketplace add <git-url>
+/plugin marketplace add doitdan/ai-automation
 /plugin install ai-automation@ai-automation
 ```
 
 Gemini CLI
 
 ```bash
-gemini extensions install <git-url>
+gemini extensions install https://github.com/doitdan/ai-automation
 ```
 
 Cursor: TODO
